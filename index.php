@@ -1,4 +1,5 @@
 <?php include "dbAcess.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +13,16 @@
 </head>
 
 <body>
-
+    <?php
+    $statement = $pdo->prepare("select * from task_tbl");
+    $statement->execute();
+    $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+    ?>
     <h3>TO-DO List Application</h3>
+    <br>
+    <p>
+        <a href="createTask.php" class="btn btn-success">Create New Task</a>
+    </p>
     <table class="table">
         <thead>
             <tr>
