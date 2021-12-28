@@ -40,10 +40,13 @@
                     <th scope="row"><?php echo $i + 1 ?></th>
                     <td><?php echo $task["Task_Title"] ?></td>
                     <td><?php echo $task["Task_Description"] ?></td>
-                    <td><?php echo $task["Task_start_time"] ?></td>
-                    <td><?php echo $task["Task_end_time"] ?></td>
+                    <td><?php echo date('g:i A', strtotime($task["Task_start_time"])); ?></td>
+                    <td><?php echo date('g:i A', strtotime($task["Task_end_time"])); ?></td>
                     <td><button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
-                        <button type="button" class="btn btn-outline-success btn-sm">Complete</button>
+                        <form action="deleteTask.php" style="display:inline-block" method="post">
+                            <input type="hidden" name="id" value=<?php echo $task["id"]; ?>>
+                            <button type="submit" class="btn btn-outline-success btn-sm">Complete</button>
+                        </form>
                     </td>
 
                 </tr>
