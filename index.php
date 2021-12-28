@@ -1,4 +1,5 @@
 <?php include "dbAcess.php" ?>
+<?php include "getTask.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +15,7 @@
 
 <body>
     <?php
-    $statement = $pdo->prepare("select * from task_tbl");
-    $statement->execute();
-    $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $tasks = getAllTask($pdo);
     ?>
     <h3>TO-DO List Application</h3>
     <br>
@@ -42,7 +41,8 @@
                     <td><?php echo $task["Task_Description"] ?></td>
                     <td><?php echo date('g:i A', strtotime($task["Task_start_time"])); ?></td>
                     <td><?php echo date('g:i A', strtotime($task["Task_end_time"])); ?></td>
-                    <td><button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
+                    <td>
+                        <a href="updateTask.php?id=<?php echo $task["id"]; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
                         <form action="deleteTask.php" style="display:inline-block" method="post">
                             <input type="hidden" name="id" value=<?php echo $task["id"]; ?>>
                             <button type="submit" class="btn btn-outline-success btn-sm">Complete</button>

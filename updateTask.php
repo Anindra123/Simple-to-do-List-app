@@ -1,4 +1,8 @@
-<?php include "dbAcess.php" ?>
+<?php
+include("dbAcess.php");
+include("getTask.php");
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +18,26 @@
 
 <body>
     <?php
+    $id = $_GET["id"] ?? null;
+
+    if ($id === null) {
+        header("Location:index.php");
+    }
+    $task = getTaskByID($pdo, $id);
+    $s_dateTime = strtotime($task["Task_start_time"]);
+    $e_dateTime = strtotime($task["Task_end_time"]);
+    $s_time = strftime('%r', $s_dateTime);
+    $e_time = strftime('%r', $e_dateTime);
+    // echo $task["Task_Title"];
+    // exit;
+    ?>
+
+    <?php
     $errors = [];
-    $sucess = [];
-    $title = '';
-    $description = '';
-    $start_time = '';
-    $end_time = '';
+    $title = $task["Task_Title"];
+    $description = $task["Task_Description"];
+    $start_time = $s_time;
+    $end_time = $e_time;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $title = $_POST["title"];
         $description = $_POST["description"];
@@ -47,26 +65,14 @@
             array_push($errors, "Start time is greater or equal to end time");
         }
         if (count($errors) === 0) {
-            $insert_statement = $pdo->prepare("insert into task_tbl (task_title,task_description,task_start_time,
-            task_end_time) values(:title,:description,:start_time,:end_time)
-            ");
-            $insert_statement->bindValue(':title', $title);
-            $insert_statement->bindValue(':description', $description);
-            $insert_statement->bindValue(':start_time', $sel_start_time);
-            $insert_statement->bindValue(':end_time', $sel_end_time);
-            $insert_statement->execute();
-            $pdo = null;
-            array_push($sucess, "Task added sucessfully");
-            $title = '';
-            $description = '';
-            $end_time = '';
-            $start_time = '';
+
+            header("Location:index.php");
         }
     }
 
 
     ?>
-    <h3>Create new task</h3>
+    <h3>Update task</h3>
     <?php if (count($errors) !== 0) : ?>
         <?php foreach ($errors as $error) : ?>
             <div class="alert alert-danger">
@@ -74,30 +80,28 @@
             </div>
         <?php endforeach ?>
     <?php endif ?>
-    <?php if (count($sucess) !== 0) : ?>
-        <div class="alert alert-success">
-            Task created sucessfully
-        </div>
-    <?php endif ?>
     <form action="createTask.php" method="post">
         <div class="mb-3">
-            <label for="taskTitle" class="form-label">Task Title</label>
-            <input type="text" class="form-control" id="taskTitle" name="title" value=<?php echo $title ?>>
+            <label class="form-label">Task Title</label>
+            <input type="text" class="form-control" name="title" value=<?php print $title; ?>>
         </div>
         <div class="mb-3">
             <label for="taskDesc" class="form-label">Task Description</label>
-            <textarea type="text" class="form-control" id="taskDesc" name="description"><?php echo $description ?></textarea>
+            <textarea type="text" class="form-control" id="taskDesc" name="description"><?php echo $description; ?></textarea>
         </div>
         <div class="mb-3 form-time">
             <label class="form-time-label" for="startTime">Select a start time : </label>
-            <input type="time" class="form-date-input" id="startTime" name="start_time" value=<?php echo $start_time ?>>
+            <input type="time" class="form-time-input" id="startTime" name="start_time" value=<?php echo $start_time; ?>>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="<?php echo $title ?>">
         </div>
         <div class="mb-3 form-time">
             <label class="form-time-label" for="endTime">Select an end time : </label>
-            <input type="time" class="form-time-input" id="endTime" name="end_time" value=<?php echo $end_time ?>>
+            <input type="time" class="form-time-input" id="endTime" name="end_time" value=<?php echo $end_time; ?>>
         </div>
-        <button type="submit" class="btn btn-primary">Create Task</button>
-        <a href='/to-do-list/' class="btn btn-primary">Go Back</a>
+        <button type="submit" class="btn btn-primary">Update Task</button>
     </form>
 </body>
 
