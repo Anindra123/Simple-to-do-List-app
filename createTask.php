@@ -66,6 +66,9 @@
 
 
     ?>
+    <p>
+        <a href='index.php' class="btn btn-secondary">Go Back</a>
+    </p>
     <h3>Create new task</h3>
     <?php if (count($errors) !== 0) : ?>
         <?php foreach ($errors as $error) : ?>
@@ -82,7 +85,7 @@
     <form action="createTask.php" method="post">
         <div class="mb-3">
             <label for="taskTitle" class="form-label">Task Title</label>
-            <input type="text" class="form-control" id="taskTitle" name="title" value=<?php echo $title ?>>
+            <input type="text" class="form-control" id="taskTitle" name="title" value="<?php echo $title ?>">
         </div>
         <div class="mb-3">
             <label for="taskDesc" class="form-label">Task Description</label>
@@ -90,14 +93,13 @@
         </div>
         <div class="mb-3 form-time">
             <label class="form-time-label" for="startTime">Select a start time : </label>
-            <input type="time" class="form-date-input" id="startTime" name="start_time" value=<?php echo $start_time ?>>
+            <input type="time" class="form-date-input" id="startTime" name="start_time" value="<?php echo $start_time ?>">
         </div>
         <div class="mb-3 form-time">
             <label class="form-time-label" for="endTime">Select an end time : </label>
-            <input type="time" class="form-time-input" id="endTime" name="end_time" value=<?php echo $end_time ?>>
+            <input type="time" class="form-time-input" id="endTime" name="end_time" value="<?php echo $end_time ?>">
         </div>
         <button type="submit" class="btn btn-primary">Create Task</button>
-        <a href='/to-do-list/' class="btn btn-primary">Go Back</a>
     </form>
 </body>
 

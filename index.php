@@ -44,7 +44,7 @@
                     <td>
                         <a href="updateTask.php?id=<?php echo $task["id"]; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
                         <form action="deleteTask.php" style="display:inline-block" method="post">
-                            <input type="hidden" name="id" value=<?php echo $task["id"]; ?>>
+                            <input type="hidden" name="id" value="<?php echo $task["id"]; ?>">
                             <button type="submit" class="btn btn-outline-success btn-sm">Complete</button>
                         </form>
                     </td>

@@ -15,5 +15,9 @@ function getTaskByID($pdo, $id)
     $statement->execute();
     $pdo = null;
     $task = $statement->fetch(PDO::FETCH_ASSOC);
-    return $task;
+    if (!$task) {
+        return [];
+    } else {
+        return $task;
+    }
 }

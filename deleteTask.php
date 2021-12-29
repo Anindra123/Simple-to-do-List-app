@@ -6,6 +6,7 @@ $id = $_POST["id"] ?? null;
 
 if ($id === null) {
     header('Location:index.php');
+    exit;
 }
 
 $delete_statment = $pdo->prepare("delete from task_tbl where id = :id");
