@@ -1,6 +1,6 @@
 <?php
-include("dbAcess.php");
-include("getTask.php");
+include_once "dbAcess.php";
+include_once "getTask.php";
 ?>
 
 

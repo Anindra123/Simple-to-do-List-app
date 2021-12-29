@@ -1,5 +1,5 @@
-<?php include "dbAcess.php" ?>
-<?php include "getTask.php" ?>
+<?php include_once "dbAcess.php" ?>
+<?php include_once "getTask.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">

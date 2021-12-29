@@ -1,4 +1,4 @@
-<?php include "dbAcess.php" ?>
+<?php include_once "dbAcess.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
