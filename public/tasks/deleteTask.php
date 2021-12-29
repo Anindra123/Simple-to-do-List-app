@@ -1,6 +1,6 @@
 <?php
 
-include "dbAcess.php";
+require_once "../../dbAcess.php";
 
 $id = $_POST["id"] ?? null;
 

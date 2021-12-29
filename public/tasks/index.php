@@ -1,22 +1,12 @@
-<?php include_once "dbAcess.php" ?>
-<?php include_once "getTask.php" ?>
+<?php require_once "../../dbAcess.php";
+include_once "../../getTask.php";
+$title = "To-do list";
+include_once "../../views/partials/header.php";
+$tasks = getAllTask($pdo);
+?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <title>To-Do List</title>
-</head>
 
 <body>
-    <?php
-    $tasks = getAllTask($pdo);
-    ?>
     <h3>TO-DO List Application</h3>
     <br>
     <p>
