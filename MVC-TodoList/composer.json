@@ -1,0 +1,15 @@
+{
+  "name": "asus/mvc-todo-list",
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  },
+  "authors": [
+    {
+      "name": "Anindra Das Bivas",
+      "email": "bivasdas911@gmail.com"
+    }
+  ],
+  "require": {}
+}

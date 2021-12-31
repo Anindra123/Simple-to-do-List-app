@@ -33,10 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <body>
-    <?php
 
-
-    ?>
     <p>
         <a href='index.php' class="btn btn-secondary">Go Back</a>
     </p>
