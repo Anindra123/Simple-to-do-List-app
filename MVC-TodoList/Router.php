@@ -9,7 +9,7 @@ class Router
     public Database $db;
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::getInstance();
     }
     public function get($url, $fn)
     {

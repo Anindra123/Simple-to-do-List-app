@@ -2,9 +2,11 @@
 
 namespace app\models;
 
+use app\Database;
+
 class Task
 {
-
+    public ?int $id = null;
     public ?string $title = null;
     public ?string $description = null;
     public ?string $start_time = null;
@@ -12,10 +14,11 @@ class Task
 
     public function load($data)
     {
-        $this->title = $data['title'];
-        $this->description = $data['description'];
-        $this->start_time = $data['start_time'];
-        $this->end_time = $data['end_time'];
+        $this->id = $data['id'] ?? null;
+        $this->title = $data['Task_Title'];
+        $this->description = $data['Task_Description'];
+        $this->start_time = $data['Task_start_time'];
+        $this->end_time = $data['Task_end_time'];
     }
     public function save()
     {
@@ -38,6 +41,14 @@ class Task
         }
         if (!empty($this->start_time) && !empty($this->end_time) && strtotime($this->start_time) >= strtotime($this->end_time)) {
             array_push($errors, "Start time is greater or equal to end time");
+        }
+        $db = Database::getInstance();
+        if (empty($errors)) {
+            if ($this->id) {
+                $db->updateTask($this);
+            } else {
+                $db->createTask($this);
+            }
         }
         return $errors;
     }

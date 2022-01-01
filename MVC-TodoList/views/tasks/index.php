@@ -30,8 +30,8 @@
                 <td><?php echo date('g:i A', strtotime($task["Task_start_time"])); ?></td>
                 <td><?php echo date('g:i A', strtotime($task["Task_end_time"])); ?></td>
                 <td>
-                    <a href="updateTask.php?id=<?php echo $task["id"]; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
-                    <form action="deleteTask.php" style="display:inline-block" method="post">
+                    <a href="/tasks/updateTask?id=<?php echo $task["id"]; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <form action="/tasks/deleteTask" style="display:inline-block" method="post">
                         <input type="hidden" name="id" value="<?php echo $task["id"]; ?>">
                         <button type="submit" class="btn btn-outline-success btn-sm">Complete</button>
                     </form>
