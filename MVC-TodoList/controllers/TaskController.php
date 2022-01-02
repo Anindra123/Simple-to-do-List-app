@@ -23,6 +23,7 @@ class TaskController
         $errors = [];
         $sucess = [];
         $taskData = [
+            'id' => '',
             'Task_Title' => '',
             'Task_Description' => '',
             'Task_start_time' => date("Y-m-d H:i:s"),
@@ -60,9 +61,9 @@ class TaskController
             header('Location: /tasks');
             exit;
         }
-        $taskData = $router->db->getTaskByID($id);
+        $taskData = Database::getInstance()->getTaskByID($id);
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $taskData['id'] = (int) $_POST['id'];
+            $taskData['id'] = $_POST['id'];
             $taskData['Task_Title'] = $_POST['title'];
             $taskData['Task_Description'] = $_POST['description'];
             $taskData['Task_start_time'] = $_POST['start_time'];

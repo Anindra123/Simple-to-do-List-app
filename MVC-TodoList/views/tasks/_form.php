@@ -29,7 +29,7 @@
         <input type="time" class="form-time-input" id="endTime" name="end_time" value="<?php echo date('H:i', strtotime($taskData['Task_end_time'])); ?>">
     </div>
     <form action="" style="display:inline-block" method="post">
-        <input type="hidden" name="id" value="<?php echo $task["id"];
+        <input type="hidden" name="id" value="<?php echo $taskData["id"];
                                                 ?>">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

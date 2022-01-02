@@ -6,7 +6,7 @@ use app\Database;
 
 class Task
 {
-    public ?int $id = null;
+    public ?string $id = null;
     public ?string $title = null;
     public ?string $description = null;
     public ?string $start_time = null;
@@ -14,7 +14,7 @@ class Task
 
     public function load($data)
     {
-        $this->id = $data['id'] ?? null;
+        $this->id =  $data['id'] ?? null;
         $this->title = $data['Task_Title'];
         $this->description = $data['Task_Description'];
         $this->start_time = $data['Task_start_time'];

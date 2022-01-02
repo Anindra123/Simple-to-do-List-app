@@ -7,7 +7,7 @@ use app\models\Task;
 
 class Database
 {
-    private ?PDO $pdo;
+    private PDO $pdo;
     private static Database $db_instance;
     private function __construct()
     {
@@ -18,7 +18,6 @@ class Database
     {
         $statement = $this->pdo->prepare("select * from task_tbl");
         $statement->execute();
-        $this->pdo = null;
         $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $tasks;
     }
@@ -32,21 +31,18 @@ class Database
         $insert_statement->bindValue(':start_time', $task->start_time);
         $insert_statement->bindValue(':end_time', $task->end_time);
         $insert_statement->execute();
-        $this->pdo = null;
     }
     public function deleteTask(int $id)
     {
         $delete_statment = $this->pdo->prepare("delete from task_tbl where id = :id");
         $delete_statment->bindValue(':id', $id);
         $delete_statment->execute();
-        $this->pdo = null;
     }
     function getTaskByID($id)
     {
         $statement = $this->pdo->prepare("select * from task_tbl where id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
-        $this->pdo = null;
         $task = $statement->fetch(PDO::FETCH_ASSOC);
         return $task;
     }
@@ -63,13 +59,14 @@ class Database
         $update_statment->bindValue(':end_time', $task->end_time);
         $update_statment->bindValue(':id', $task->id);
         $update_statment->execute();
-        $this->pdo = null;
     }
     public static function getInstance()
     {
+
         if (!isset(self::$db_instance)) {
             self::$db_instance = new Database();
         }
+
         return self::$db_instance;
     }
 }
